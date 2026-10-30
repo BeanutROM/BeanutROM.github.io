@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#425e76"/><stop offset="1" stop-color="#1c303b"/></linearGradient></defs>
+    <rect width="960" height="540" fill="url(#g)"/><circle cx="740" cy="115" r="64" fill="#d9bd80" opacity=".52"/>
+    <path d="M0 380 165 245 262 345 412 192 599 376 770 226 960 344V540H0Z" fill="#1c303b" opacity=".83"/>
+    <path d="M0 465 140 405 335 448 510 340 680 462 835 400 960 445V540H0Z" fill="#131e25" opacity=".7"/>
+    <rect x="22" y="20" width="319" height="32" rx="2" fill="#081418" opacity=".78"/>
+    <text x="38" y="41" font-size="15" font-family="Arial, sans-serif" font-weight="700" fill="#f0f3ea" letter-spacing="1.5">ILLUSTRATIVE MEDIA / PREVIEW</text>
+    <rect x="20" y="481" width="440" height="39" fill="#081418" opacity=".8"/>
+    <text x="38" y="506" font-size="19" font-family="Arial, sans-serif" fill="#f0f3ea" letter-spacing="1">ATLAS / SCENE 01</text>
+    </svg>

@@ -1,0 +1,465 @@
+{
+  "generated_at": "",
+  "demo": true,
+  "site": {
+    "name": "Beanut Translations",
+    "github_url": "https://github.com/BeanutROM"
+  },
+  "owners": [
+    "BeanutROM"
+  ],
+  "projects": [
+    {
+      "id": "demo/1",
+      "repo": "",
+      "title": "The Forgotten Atlas",
+      "description": "Illustrative entry showing how a complete translation appears in the archive.",
+      "platform": "PS1",
+      "status": "Released",
+      "topics": [
+        "fan-translation",
+        "psx"
+      ],
+      "owner": "Demo",
+      "stars": 68,
+      "forks": 0,
+      "updated_at": "2026-09-22T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "v1.0",
+      "cover_url": "./demo-images/screenshot-1.svg",
+      "screenshots": [
+        "./demo-images/screenshot-1.svg",
+        "./demo-images/screenshot-2.svg",
+        "./demo-images/screenshot-3.svg"
+      ],
+      "featured": true,
+      "demo": true,
+      "game_description": "This is an illustrative game entry showing where the longer game description appears. When published, the site reads assets/description.txt from each repository, then falls back to its GitHub description.\n\nYou can optionally provide a source attribution for a manually supplied game description.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": true
+    },
+    {
+      "id": "demo/2",
+      "repo": "",
+      "title": "Glass Horizon",
+      "description": "Illustrative in-progress entry with a platform label and project tags.",
+      "platform": "PS2",
+      "status": "In-Progress",
+      "topics": [
+        "fan-translation",
+        "ps2"
+      ],
+      "owner": "Demo",
+      "stars": 31,
+      "forks": 0,
+      "updated_at": "2026-08-02T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "",
+      "cover_url": "./demo-images/screenshot-4.svg",
+      "screenshots": [
+        "./demo-images/screenshot-4.svg"
+      ],
+      "featured": false,
+      "demo": true,
+      "game_description": "Illustrative work-in-progress entry with a platform label and project tags.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": false
+    },
+    {
+      "id": "demo/3",
+      "repo": "",
+      "title": "Moonlit Testament",
+      "description": "Illustrative testing release entry. Real entries are discovered from public GitHub repositories.",
+      "platform": "PC-FX",
+      "status": "Released",
+      "topics": [
+        "localization",
+        "pc-fx"
+      ],
+      "owner": "Demo",
+      "stars": 18,
+      "forks": 0,
+      "updated_at": "2026-07-11T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "beta-3",
+      "cover_url": "./demo-images/screenshot-5.svg",
+      "screenshots": [
+        "./demo-images/screenshot-5.svg"
+      ],
+      "featured": false,
+      "demo": true,
+      "game_description": "Illustrative testing release entry. Real entries are discovered from public GitHub repositories.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": true
+    },
+    {
+      "id": "demo/4",
+      "repo": "",
+      "title": "The Clockwork Garden",
+      "description": "An example of a handheld project in the catalog's card grid.",
+      "platform": "PSP",
+      "status": "In-Progress",
+      "topics": [
+        "english-translation",
+        "psp"
+      ],
+      "owner": "Demo",
+      "stars": 12,
+      "forks": 0,
+      "updated_at": "2026-05-16T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "",
+      "cover_url": "",
+      "screenshots": [],
+      "featured": false,
+      "demo": true,
+      "game_description": "An example of a handheld project in the catalog's card grid.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": false
+    },
+    {
+      "id": "demo/5",
+      "repo": "",
+      "title": "Sea of Ash",
+      "description": "Illustrative paused translation project. Work can resume later.",
+      "platform": "Saturn",
+      "status": "Paused",
+      "topics": [
+        "game-translation",
+        "saturn"
+      ],
+      "owner": "Demo",
+      "stars": 8,
+      "forks": 0,
+      "updated_at": "2025-12-18T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "",
+      "cover_url": "",
+      "screenshots": [],
+      "featured": false,
+      "demo": true,
+      "game_description": "This preview entry demonstrates assets/status.txt set to Paused on a repository without published GitHub releases.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": false
+    },
+    {
+      "id": "demo/6",
+      "repo": "",
+      "title": "Mirrors of the East",
+      "description": "An illustrative completed translation showing another console and cover fallback.",
+      "platform": "SNES",
+      "status": "Released",
+      "topics": [
+        "fan-translation",
+        "snes"
+      ],
+      "owner": "Demo",
+      "stars": 45,
+      "forks": 0,
+      "updated_at": "2026-01-21T10:00:00Z",
+      "github_url": "",
+      "homepage": "",
+      "issue_url": "",
+      "release_url": "",
+      "release_tag": "v1.0",
+      "cover_url": "",
+      "screenshots": [],
+      "featured": false,
+      "demo": true,
+      "game_description": "An illustrative completed translation showing another console and cover fallback.",
+      "description_source_url": "",
+      "youtube_url": "",
+      "has_release": true
+    }
+  ],
+  "platform_colors": {
+    "32X": {
+      "background": "#145887",
+      "text": "#ffffff"
+    },
+    "3DO": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "3DS": {
+      "background": "#b32d37",
+      "text": "#ffffff"
+    },
+    "Amiga": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "Atari 2600": {
+      "background": "#9d432c",
+      "text": "#ffffff"
+    },
+    "Atari 5200": {
+      "background": "#9d432c",
+      "text": "#ffffff"
+    },
+    "Atari 7800": {
+      "background": "#9d432c",
+      "text": "#ffffff"
+    },
+    "C64": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "CD-i": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "ColecoVision": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "DOS": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "Dreamcast": {
+      "background": "#ba4d23",
+      "text": "#ffffff"
+    },
+    "FM Towns": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "Game Gear": {
+      "background": "#145887",
+      "text": "#ffffff"
+    },
+    "GameCube": {
+      "background": "#6044a1",
+      "text": "#ffffff"
+    },
+    "GB": {
+      "background": "#a62d43",
+      "text": "#ffffff"
+    },
+    "GBA": {
+      "background": "#a62d43",
+      "text": "#ffffff"
+    },
+    "GBC": {
+      "background": "#a62d43",
+      "text": "#ffffff"
+    },
+    "Genesis": {
+      "background": "#333b46",
+      "text": "#ffffff"
+    },
+    "GP32": {
+      "background": "#6a4a91",
+      "text": "#ffffff"
+    },
+    "Intellivision": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "Jaguar": {
+      "background": "#9d432c",
+      "text": "#ffffff"
+    },
+    "Lynx": {
+      "background": "#9d432c",
+      "text": "#ffffff"
+    },
+    "MAME": {
+      "background": "#7536a0",
+      "text": "#ffffff"
+    },
+    "Master System": {
+      "background": "#145887",
+      "text": "#ffffff"
+    },
+    "MSX": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "MSX2": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "N-Gage": {
+      "background": "#6a4a91",
+      "text": "#ffffff"
+    },
+    "N64": {
+      "background": "#285c51",
+      "text": "#ffffff"
+    },
+    "NDS": {
+      "background": "#42516c",
+      "text": "#ffffff"
+    },
+    "Neo Geo": {
+      "background": "#735511",
+      "text": "#ffffff"
+    },
+    "Neo Geo CD": {
+      "background": "#735511",
+      "text": "#ffffff"
+    },
+    "Neo Geo Pocket": {
+      "background": "#735511",
+      "text": "#ffffff"
+    },
+    "Neo Geo Pocket Color": {
+      "background": "#735511",
+      "text": "#ffffff"
+    },
+    "NES": {
+      "background": "#a62d43",
+      "text": "#ffffff"
+    },
+    "Odyssey": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "Odyssey 2": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "Other": {
+      "background": "#3b484e",
+      "text": "#ffffff"
+    },
+    "PC": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "PC Engine": {
+      "background": "#8b3636",
+      "text": "#ffffff"
+    },
+    "PC Engine CD": {
+      "background": "#8b3636",
+      "text": "#ffffff"
+    },
+    "PC-88": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "PC-98": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "PC-FX": {
+      "background": "#913e55",
+      "text": "#ffffff"
+    },
+    "PS1": {
+      "background": "#3c4c88",
+      "text": "#ffffff"
+    },
+    "PS2": {
+      "background": "#243a89",
+      "text": "#ffffff"
+    },
+    "PS3": {
+      "background": "#252a34",
+      "text": "#ffffff"
+    },
+    "PS4": {
+      "background": "#243e8f",
+      "text": "#ffffff"
+    },
+    "PS5": {
+      "background": "#243e8f",
+      "text": "#ffffff"
+    },
+    "PSP": {
+      "background": "#243e8f",
+      "text": "#ffffff"
+    },
+    "Saturn": {
+      "background": "#274577",
+      "text": "#ffffff"
+    },
+    "Sega CD": {
+      "background": "#145887",
+      "text": "#ffffff"
+    },
+    "SG-1000": {
+      "background": "#145887",
+      "text": "#ffffff"
+    },
+    "SNES": {
+      "background": "#574a91",
+      "text": "#ffffff"
+    },
+    "Switch": {
+      "background": "#c92c34",
+      "text": "#ffffff"
+    },
+    "Vectrex": {
+      "background": "#485a71",
+      "text": "#ffffff"
+    },
+    "Virtual Boy": {
+      "background": "#a62d43",
+      "text": "#ffffff"
+    },
+    "Vita": {
+      "background": "#243e8f",
+      "text": "#ffffff"
+    },
+    "Wii": {
+      "background": "#c0e9ef",
+      "text": "#123844"
+    },
+    "Wii U": {
+      "background": "#28759d",
+      "text": "#ffffff"
+    },
+    "WonderSwan": {
+      "background": "#6a4a91",
+      "text": "#ffffff"
+    },
+    "WonderSwan Color": {
+      "background": "#6a4a91",
+      "text": "#ffffff"
+    },
+    "X68000": {
+      "background": "#364b57",
+      "text": "#ffffff"
+    },
+    "Xbox": {
+      "background": "#236b36",
+      "text": "#ffffff"
+    },
+    "Xbox 360": {
+      "background": "#387524",
+      "text": "#ffffff"
+    },
+    "Xbox One": {
+      "background": "#236b36",
+      "text": "#ffffff"
+    },
+    "Xbox Series": {
+      "background": "#236b36",
+      "text": "#ffffff"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Generated build outputs
+site/assets/thumbnails/
+reports/
+__pycache__/
+*.py[cod]
