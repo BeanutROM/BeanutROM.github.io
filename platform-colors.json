@@ -1,0 +1,138 @@
+{
+  "Other": {
+    "background": "#424c57",
+    "text": "#ffffff"
+  },
+  "PS1": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "PS2": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "PS3": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "PSP": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "Vita": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "PS4": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "PS5": {
+    "background": "#365c83",
+    "text": "#ffffff"
+  },
+  "Xbox": {
+    "background": "#386c50",
+    "text": "#ffffff"
+  },
+  "Xbox 360": {
+    "background": "#386c50",
+    "text": "#ffffff"
+  },
+  "Xbox One": {
+    "background": "#386c50",
+    "text": "#ffffff"
+  },
+  "Xbox Series": {
+    "background": "#386c50",
+    "text": "#ffffff"
+  },
+  "NES": {
+    "background": "#98534c",
+    "text": "#ffffff"
+  },
+  "SNES": {
+    "background": "#98534c",
+    "text": "#ffffff"
+  },
+  "N64": {
+    "background": "#98534c",
+    "text": "#ffffff"
+  },
+  "GameCube": {
+    "background": "#715b83",
+    "text": "#ffffff"
+  },
+  "Wii": {
+    "background": "#536e81",
+    "text": "#ffffff"
+  },
+  "Wii U": {
+    "background": "#536e81",
+    "text": "#ffffff"
+  },
+  "Switch": {
+    "background": "#98534c",
+    "text": "#ffffff"
+  },
+  "GB": {
+    "background": "#67724d",
+    "text": "#ffffff"
+  },
+  "GBC": {
+    "background": "#67724d",
+    "text": "#ffffff"
+  },
+  "GBA": {
+    "background": "#67724d",
+    "text": "#ffffff"
+  },
+  "NDS": {
+    "background": "#67724d",
+    "text": "#ffffff"
+  },
+  "3DS": {
+    "background": "#67724d",
+    "text": "#ffffff"
+  },
+  "Saturn": {
+    "background": "#536c79",
+    "text": "#ffffff"
+  },
+  "Dreamcast": {
+    "background": "#856244",
+    "text": "#ffffff"
+  },
+  "Genesis": {
+    "background": "#536c79",
+    "text": "#ffffff"
+  },
+  "Sega CD": {
+    "background": "#536c79",
+    "text": "#ffffff"
+  },
+  "PC Engine": {
+    "background": "#715b83",
+    "text": "#ffffff"
+  },
+  "PC Engine CD": {
+    "background": "#715b83",
+    "text": "#ffffff"
+  },
+  "PC-FX": {
+    "background": "#715b83",
+    "text": "#ffffff"
+  },
+  "MAME": {
+    "background": "#726278",
+    "text": "#ffffff"
+  },
+  "PC": {
+    "background": "#4e6372",
+    "text": "#ffffff"
+  },
+  "DOS": {
+    "background": "#4e6372",
+    "text": "#ffffff"
+  }
+}

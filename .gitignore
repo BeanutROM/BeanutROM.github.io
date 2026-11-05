@@ -1,0 +1,16 @@
+# Generated build outputs
+site/data/projects.json
+site/data/watch-state.json
+site/feed.xml
+site/assets/thumbnails/
+__pycache__/
+*.py[cod]
+
+# Brand assets are supplied during the Pages build, not source-controlled.
+.private-config/
+site/assets/logo.png
+site/assets/favicon.png
+site/assets/theme.css
+
+# Optional private, durable cache checkout and build artifact
+.catalog-cache/
