@@ -1,0 +1,249 @@
+name: Update catalog and deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [source_updated]
+  schedule:
+    # Minimum GitHub-supported frequency; stagger from the busy minute 0.
+    - cron: '3-58/5 * * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+    outputs:
+      deploy: ${{ steps.detect.outputs.deploy }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+      - name: Check out private configuration
+        if: ${{ vars.PRIVATE_CONFIG_REPOSITORY != '' }}
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ vars.PRIVATE_CONFIG_REPOSITORY }}
+          token: ${{ secrets.PRIVATE_CONFIG_REPO_TOKEN }}
+          path: .private-config
+          persist-credentials: false
+      - name: Check tracked repositories and YouTube uploads
+        id: detect
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          CATALOG_PRIVATE_CONFIG_DIR: ${{ vars.PRIVATE_CONFIG_REPOSITORY != '' && '.private-config' || '' }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CATALOG_SITE_URL: ${{ vars.CATALOG_SITE_URL }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID || secrets.YOUTUBE_CHANNEL_ID }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python -m scripts.watch
+
+  publish:
+    needs: check
+    if: needs.check.outputs.deploy == 'true'
+    runs-on: ubuntu-26.04
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+      - name: Check out private configuration
+        if: ${{ vars.PRIVATE_CONFIG_REPOSITORY != '' }}
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ vars.PRIVATE_CONFIG_REPOSITORY }}
+          token: ${{ secrets.PRIVATE_CONFIG_REPO_TOKEN }}
+          path: .private-config
+          persist-credentials: false
+      - name: Check out optional durable cache (private checkout)
+        if: ${{ vars.CATALOG_CACHE_REPOSITORY != '' }}
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ vars.CATALOG_CACHE_REPOSITORY }}
+          token: ${{ secrets.CATALOG_CACHE_TOKEN }}
+          path: .catalog-cache
+          persist-credentials: false
+      - name: Install Markdown renderer
+        run: python -m pip install -r requirements.txt
+      - name: Install ImageMagick if not already available
+        run: |
+          if ! command -v magick >/dev/null && ! command -v convert >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y --no-install-recommends imagemagick
+          fi
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Fetch public repositories and build catalog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ${{ github.repository_owner }}
+          CATALOG_PRIVATE_CONFIG_DIR: ${{ vars.PRIVATE_CONFIG_REPOSITORY != '' && '.private-config' || '' }}
+          CATALOG_CACHE_DIR: ${{ vars.CATALOG_CACHE_REPOSITORY != '' && '.catalog-cache/state' || '' }}
+          CATALOG_SITE_URL: ${{ vars.CATALOG_SITE_URL }}
+          CATALOG_SITE_JSON: ${{ vars.CATALOG_SITE_JSON }}
+          CATALOG_PLATFORM_COLORS_JSON: ${{ vars.CATALOG_PLATFORM_COLORS_JSON }}
+          IGDB_CLIENT_ID: ${{ secrets.IGDB_CLIENT_ID }}
+          IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID || secrets.YOUTUBE_CHANNEL_ID }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python -m scripts.build
+      # The only uploaded artifact contains published site files. The private
+      # checkouts and cache remain local to this runner, never copied to an
+      # Actions artifact visible to readers of the public repository.
+      - name: Verify static site publish payload
+        run: python -m scripts.publish_guard site
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+      - name: Upload static site (public Pages content only)
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+          # Keep the site's .nojekyll file in the Pages artifact.
+          include-hidden-files: true
+      - name: Deploy GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v5
+      # Deployment must succeed before a cache write can happen. The cache
+      # repository is the *only* location for durable private build state.
+      # No private cache data is uploaded as an Actions artifact.
+      - name: Save durable cache state after deployment
+        if: ${{ vars.CATALOG_CACHE_REPOSITORY != '' }}
+        continue-on-error: true
+        env:
+          CATALOG_CACHE_TOKEN: ${{ secrets.CATALOG_CACHE_TOKEN }}
+        run: |
+          set -euo pipefail
+          rm -rf .catalog-cache/state/diagnostics
+          git -C .catalog-cache config user.name 'game-catalog-cache-bot'
+          git -C .catalog-cache config user.email 'game-catalog-cache-bot@users.noreply.github.com'
+          git -C .catalog-cache add -A -- state/
+          if ! git -C .catalog-cache diff --cached --quiet; then
+            git -C .catalog-cache commit -m 'Update successful catalog build cache'
+            # Checkout used persist-credentials:false. Authenticate only this
+            # push with a dedicated token scoped to the private cache repo.
+            auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$CATALOG_CACHE_TOKEN" | base64 -w0)"
+            git -C .catalog-cache -c "http.https://github.com/.extraheader=$auth_header" push origin HEAD
+          else
+            echo 'Cache state already current'
+          fi
+
+  # Remove inactive Pages deployment records only after publishing succeeds.
+  cleanup:
+    needs: publish
+    if: needs.publish.result == 'success'
+    runs-on: ubuntu-26.04
+    permissions:
+      deployments: write
+    steps:
+      - name: Prune inactive GitHub Pages deployment records
+        uses: actions/github-script@v9
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const deployments = await github.paginate(
+              github.rest.repos.listDeployments,
+              { owner, repo, environment: 'github-pages', per_page: 100 }
+            );
+            let deleted = 0;
+            for (const deployment of deployments) {
+              try {
+                const { data: statuses } = await github.rest.repos.listDeploymentStatuses({
+                  owner, repo, deployment_id: deployment.id, per_page: 1
+                });
+                // Never deactivate or delete the currently live deployment.
+                if (statuses[0]?.state !== 'inactive') continue;
+                await github.rest.repos.deleteDeployment({
+                  owner, repo, deployment_id: deployment.id
+                });
+                deleted++;
+              } catch (error) {
+                core.warning(`Could not remove inactive Pages deployment ${deployment.id}: ${error.message}`);
+              }
+            }
+            core.info(`Removed ${deleted} inactive Pages deployments.`);
+
+
+  # Clean workflow RUN history, not workflow definitions or Pages deployment
+  # records. The job is independent of publishing and runs even when the
+  # lightweight check skips a full rebuild.
+  prune-history:
+    needs: [check, publish]
+    if: ${{ always() && !cancelled() }}
+    runs-on: ubuntu-26.04
+    permissions:
+      actions: write
+    steps:
+      - name: Keep the latest 20 catalog workflow runs
+        uses: actions/github-script@v9
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo;
+            const workflow_id = 'pages.yml';
+            const retainCount = 20;
+
+            // Paginate first, then delete from a stable snapshot. Octokit
+            // normalizes workflow_runs into a flat array before returning it.
+            const runs = (await github.paginate(
+              github.rest.actions.listWorkflowRuns,
+              { owner, repo, workflow_id, per_page: 100 }
+            )).map((run) => ({
+              id: run.id,
+              status: run.status,
+              created_at: run.created_at
+            }));
+            runs.sort((a, b) =>
+              Date.parse(b.created_at) - Date.parse(a.created_at) || b.id - a.id
+            );
+
+            const protectedIds = new Set(runs.slice(0, retainCount).map(run => run.id));
+            // The current run is still executing this job. Never delete it,
+            // even if a newer run started after this one was queued.
+            protectedIds.add(context.runId);
+            const removable = runs.filter(run =>
+              !protectedIds.has(run.id) && run.status === 'completed'
+            );
+
+            let deleted = 0;
+            let failed = 0;
+            for (const run of removable) {
+              try {
+                await github.rest.actions.deleteWorkflowRun({
+                  owner, repo, run_id: run.id
+                });
+                deleted++;
+              } catch (error) {
+                failed++;
+                core.warning(`Could not remove workflow run ${run.id}: ${error.message}`);
+              }
+            }
+            core.info(`History retention: ${runs.length} listed, ${deleted} deleted, ` +
+              `${failed} failed; kept 20 newest plus any active/current runs.`);

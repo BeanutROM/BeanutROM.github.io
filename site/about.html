@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151b21">
+  <meta name="description" content="About this game catalog.">
+  <title>About | Game Catalog</title>
+  <link rel="icon" id="site-favicon" type="image/svg+xml" href="assets/default-icon.svg">
+  <link rel="apple-touch-icon" id="site-apple-icon" href="assets/default-icon.svg">
+  <link rel="alternate" type="application/rss+xml" title="Game Catalog updates" href="feed.xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="about.js" defer></script>
+</head>
+<body>
+  <a href="#about-content" class="skip-link">Skip to About</a>
+  <div class="page-shell" id="top">
+    <header class="site-header">
+      <a href="index.html" class="brand" title="Back to games">
+        <img id="brand-logo" class="brand-logo" alt="" hidden>
+        <span class="brand-copy">
+          <span class="brand-tagline">Game projects and releases</span>
+          <span class="brand-count" id="total-games" aria-live="polite">Loading games…</span>
+        </span>
+      </a>
+      <div class="header-actions">
+        <a id="nav-about" href="about.html" aria-current="page">About</a>
+        <a id="nav-rss" class="social-site-link" href="feed.xml" type="application/rss+xml" aria-label="RSS" title="Subscribe to updates"><span class="social-link-text">RSS</span><img class="custom-social-icon" id="rss-icon" alt="" hidden></a>
+        <a id="nav-github" class="social-site-link" href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><span class="social-link-text">GitHub</span><img class="custom-social-icon" id="github-icon" alt="" hidden></a>
+        <span class="community-actions">
+        <a class="community-link discord-link" id="nav-discord" hidden target="_blank" rel="noopener noreferrer" aria-label="Join our Discord server" title="Discord"><span class="social-link-text">Discord</span><img class="custom-social-icon" id="discord-icon" alt="" hidden></a>
+        <a class="community-link bluesky-link" id="nav-bluesky" hidden target="_blank" rel="noopener noreferrer" aria-label="Visit our Bluesky profile" title="Bluesky"><span class="social-link-text">Bluesky</span><img class="custom-social-icon" id="bluesky-icon" alt="" hidden></a>
+        <a class="support-link" id="support-link" hidden target="_blank" rel="noopener noreferrer" aria-label="Support this project"><span class="social-link-text" id="support-label">Ko-fi</span><img class="custom-social-icon" id="kofi-icon" alt="" hidden></a>
+        </span>
+        <button type="button" id="theme-toggle" class="theme-button" aria-label="Switch to light theme" title="Toggle light/dark mode">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.5 1.5m11.2 11.2 1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="about-content" class="about-main">
+      <article class="about-content" aria-label="About this site">
+        <!-- BEGIN PRIVATE ABOUT CONTENT -->
+        <!-- END PRIVATE ABOUT CONTENT -->
+      </article>
+    </main>
+    <footer class="footer"><span>© <span id="footer-year"></span> <span id="footer-name">Game Catalog</span></span><span>Game artwork and trademarks belong to their respective owners.</span><a href="index.html">Back to games ↑</a></footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#151b21">
+  <!-- YouTube embeds require the site origin in the Referer request (error 153). -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="description" content="Game projects, releases, screenshots, and videos.">
+  <title>Games | Game Catalog</title>
+  <link rel="icon" id="site-favicon" type="image/svg+xml" href="assets/default-icon.svg">
+  <link rel="apple-touch-icon" id="site-apple-icon" href="assets/default-icon.svg">
+  <link rel="alternate" type="application/rss+xml" title="Game Catalog updates" href="feed.xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a href="#games" class="skip-link">Skip to Games</a>
+  <div class="page-shell" id="top">
+    <header class="site-header">
+      <a href="#top" class="brand" title="Back to top">
+        <img id="brand-logo" class="brand-logo" alt="" hidden>
+        <span class="brand-copy">
+          <span class="brand-tagline">Game projects and releases</span>
+          <span class="brand-count" id="total-games" aria-live="polite">Loading games…</span>
+        </span>
+      </a>
+      <div class="header-actions">
+        <a id="nav-about" href="about.html">About</a>
+        <a id="nav-rss" class="social-site-link" href="feed.xml" type="application/rss+xml" aria-label="RSS" title="Subscribe to updates"><span class="social-link-text">RSS</span><img class="custom-social-icon" id="rss-icon" alt="" hidden></a>
+        <a id="nav-github" class="social-site-link" href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><span class="social-link-text">GitHub</span><img class="custom-social-icon" id="github-icon" alt="" hidden></a>
+        <span class="community-actions">
+        <a class="community-link discord-link" id="nav-discord" hidden target="_blank" rel="noopener noreferrer" aria-label="Join our Discord server" title="Discord"><span class="social-link-text">Discord</span><img class="custom-social-icon" id="discord-icon" alt="" hidden></a>
+        <a class="community-link bluesky-link" id="nav-bluesky" hidden target="_blank" rel="noopener noreferrer" aria-label="Visit our Bluesky profile" title="Bluesky"><span class="social-link-text">Bluesky</span><img class="custom-social-icon" id="bluesky-icon" alt="" hidden></a>
+        <a class="support-link" id="support-link" hidden target="_blank" rel="noopener noreferrer" aria-label="Support this project"><span class="social-link-text" id="support-label">Ko-fi</span><img class="custom-social-icon" id="kofi-icon" alt="" hidden></a>
+        </span>
+        <button type="button" id="theme-toggle" class="theme-button" aria-label="Switch to light theme" title="Toggle light/dark mode">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.5 1.5m11.2 11.2 1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="release-showcase" id="release-showcase" aria-label="Recently released games" hidden>
+        <div class="showcase-heading">
+          <div class="showcase-heading-text"><h2>Recent releases</h2><span id="showcase-position" aria-live="off"></span></div>
+        </div>
+        <div class="showcase-stage" id="showcase-stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Recent releases: drag covers, click a cover, or use arrow keys to browse">
+          <div class="showcase-track" id="showcase-track"></div>
+        </div>
+        <div class="expanded-details showcase-detail" id="showcase-detail" role="region" aria-label="Selected release details" aria-hidden="true" inert></div>
+        <div class="showcase-dots" id="showcase-dots" role="group" aria-label="Drag or select a release indicator"></div>
+      </section>
+      <section class="library" id="games" aria-label="Game catalog">
+        <div class="filters">
+          <div class="search-wrap">
+            <label class="search-field" for="search">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              <input type="search" id="search" placeholder="Search games, platforms, keywords…" autocomplete="off">
+              <kbd>/</kbd>
+            </label>
+            <button type="button" id="clear-filters" hidden>Clear filters ×</button>
+          </div>
+          <div class="select-wrap" id="platform-dropdown">
+            <span class="select-label" id="platform-label">Platform</span>
+            <button type="button" class="dropdown-trigger" id="platform-filter" aria-labelledby="platform-label platform-value" aria-haspopup="listbox" aria-controls="platform-menu" aria-expanded="false"><span class="dropdown-value" id="platform-value">All platforms</span><span class="dropdown-chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="platform-menu" role="listbox" tabindex="-1" aria-labelledby="platform-label" hidden>
+              <div role="option" id="platform-option-all" data-value="all" aria-selected="true">All platforms</div>
+            </div>
+          </div>
+          <div class="select-wrap" id="status-dropdown">
+            <span class="select-label" id="status-label">Status</span>
+            <button type="button" class="dropdown-trigger" id="status-filter" aria-labelledby="status-label status-value" aria-haspopup="listbox" aria-controls="status-menu" aria-expanded="false"><span class="dropdown-value" id="status-value">All</span><span class="dropdown-chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="status-menu" role="listbox" tabindex="-1" aria-labelledby="status-label" hidden>
+              <div role="option" id="status-option-all" data-value="all" aria-selected="true">All</div>
+              <div role="option" id="status-option-released" data-value="Released" aria-selected="false">Released</div>
+              <div role="option" id="status-option-paused" data-value="Paused" aria-selected="false">Paused</div>
+              <div role="option" id="status-option-progress" data-value="In-Progress" aria-selected="false">In-Progress</div>
+            </div>
+          </div>
+          <div class="select-wrap" id="media-dropdown">
+            <span class="select-label" id="media-label">Media</span>
+            <button type="button" class="dropdown-trigger" id="media-filter" aria-labelledby="media-label media-value" aria-haspopup="listbox" aria-controls="media-menu" aria-expanded="false"><span class="dropdown-value" id="media-value">All</span><span class="dropdown-chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="media-menu" role="listbox" tabindex="-1" aria-labelledby="media-label" hidden>
+              <div role="option" id="media-option-all" data-value="all" aria-selected="true">All</div>
+              <div role="option" id="media-option-screenshots" data-value="screenshots" data-label="Screenshots" aria-selected="false">Screenshots only</div>
+              <div role="option" id="media-option-videos" data-value="videos" data-label="Videos" aria-selected="false">Videos only</div>
+              <div role="option" id="media-option-both" data-value="both" aria-selected="false">Both</div>
+              <div role="option" id="media-option-none" data-value="none" aria-selected="false">None</div>
+            </div>
+          </div>
+          <div class="select-wrap" id="sort-dropdown">
+            <span class="select-label" id="sort-label">Sort by</span>
+            <button type="button" class="dropdown-trigger" id="sort" aria-labelledby="sort-label sort-value" aria-haspopup="listbox" aria-controls="sort-menu" aria-expanded="false"><span class="dropdown-value" id="sort-value">Recently updated</span><span class="dropdown-chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="sort-menu" role="listbox" tabindex="-1" aria-labelledby="sort-label" hidden>
+              <div role="option" id="sort-option-recent" data-value="recent" aria-selected="true">Recently updated</div>
+              <div role="option" id="sort-option-az" data-value="az" aria-selected="false">Title A–Z</div>
+              <div role="option" id="sort-option-stars" data-value="stars" aria-selected="false">Most starred</div>
+              <div role="option" id="sort-option-oldest" data-value="oldest" aria-selected="false">Least recently updated</div>
+            </div>
+          </div>
+        </div>
+        <p id="expand-hint" class="expand-hint">Select a game to see its screenshots, trailer, description, and release links.</p>
+        <div id="project-grid" class="project-grid" aria-live="polite" aria-busy="true"></div>
+        <div class="empty-state" id="empty-state" hidden><h2>No games found.</h2><p>Try a different search term, platform, status, or media category.</p><button id="empty-reset" type="button">Reset filters</button></div>
+        <div class="more-row" id="more-row" hidden><button id="show-more" type="button">Show more games <span id="more-count"></span> ↓</button></div>
+      </section>
+    </main>
+    <footer class="footer"><span>© <span id="footer-year"></span> <span id="footer-name">Game Catalog</span></span><span>Game artwork and trademarks belong to their respective owners.</span><a href="#top">Back to top ↑</a></footer>
+  </div>
+</body>
+</html>
